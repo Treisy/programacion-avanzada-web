@@ -1,0 +1,9 @@
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\obj\Debug\Negocios.csprojResolveAssemblyReference.cache
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Negocio.dll
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Negocio.pdb
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Datos.dll
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Entidades.dll
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Datos.pdb
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\bin\Debug\Entidades.pdb
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\obj\Debug\Negocio.dll
+C:\Users\trei_\OneDrive\UNED\2016, III Cuatrimestre\Programación avanzada en web\programacion-avanzada-web\UniversidadTJV\Negocio\obj\Debug\Negocio.pdb
