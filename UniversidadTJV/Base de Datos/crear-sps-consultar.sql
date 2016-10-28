@@ -32,3 +32,18 @@ BEGIN
 	 WHERE id_tipo = @id_tipo
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_consultar_profesor]
+	@id_profesor INT
+AS
+BEGIN
+	SELECT [id_profesor]
+		  ,[cedula]
+		  ,[nombre]
+		  ,[primer_apellido]
+		  ,[segundo_apellido]
+		  ,[fecha_nacimiento]
+	  FROM [dbo].[tb_profesores]
+	 WHERE id_profesor = @id_profesor
+END;
+GO

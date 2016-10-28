@@ -36,3 +36,21 @@ BEGIN
 	    OR tipo LIKE @valor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_buscar_profesor]
+	@valor VARCHAR(150)
+AS
+BEGIN
+	SELECT [id_profesor]
+		  ,[cedula]
+		  ,[nombre]
+		  ,[primer_apellido]
+		  ,[segundo_apellido]
+		  ,[fecha_nacimiento]
+	  FROM [dbo].[tb_profesores]
+	 WHERE cedula = @valor
+	    OR nombre = @valor
+		OR primer_apellido = @valor
+		OR segundo_apellido = @valor
+END;
+GO
