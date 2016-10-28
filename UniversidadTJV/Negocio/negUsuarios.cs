@@ -33,7 +33,7 @@ namespace Negocios
             return _UsuariosDatos.ModificarUsuario(cedula, nombre_usuario, contrasena, nombre, primer_apellido, segundo_apellido, usuario_modifica);
         }
 
-        public entUsuarios BuscarUsuario(string valor)
+        public DataTable BuscarUsuario(string valor)
         {
             return _UsuariosDatos.BuscarUsuarios(valor);
         }

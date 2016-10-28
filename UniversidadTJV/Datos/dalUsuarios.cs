@@ -128,8 +128,9 @@ namespace Datos
             return mensaje;
         }
 
-        public entUsuarios BuscarUsuarios(string valor)
+        public DataTable BuscarUsuarios(string valor)
         {
+            DataTable datos = new DataTable();
             try
             {
                 conexion.conectar();
@@ -137,25 +138,12 @@ namespace Datos
                 String[,] parametros = new String[1, 2] { { "@valor", valor } };
                 conexion.sqlQuery("sp_buscar_usuario", parametros);
                 datos = conexion.ejecutarConsultaSQL();
-
-                //Se cargan los datos del usuario, de la BD a los atributos de la clase
-                if (datos.Rows.Count > 0)
-                {
-                    DataRow fila = datos.Rows[0];
-
-                    this.usuarioEnt.Nombre = fila["nombre"].ToString();
-                    this.usuarioEnt.Nombre = fila["cedula"].ToString();
-                    this.usuarioEnt.NombreUsuario = fila["nombre_usuario"].ToString();
-                    this.usuarioEnt.PrimerApellido = fila["primer_apellido"].ToString();
-                    this.usuarioEnt.SegundoApellido = fila["segundo_apellido"].ToString();
-                }
-
             }
             catch (SqlException ex)
             {
                 Console.WriteLine(ex);
             }
-            return this.usuarioEnt;
+            return datos;
         }
     }
 }
