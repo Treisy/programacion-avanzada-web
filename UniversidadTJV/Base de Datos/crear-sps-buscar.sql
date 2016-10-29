@@ -48,9 +48,9 @@ BEGIN
 		  ,[segundo_apellido]
 		  ,[fecha_nacimiento]
 	  FROM [dbo].[tb_profesores]
-	 WHERE cedula = @valor
-	    OR nombre = @valor
-		OR primer_apellido = @valor
-		OR segundo_apellido = @valor
+	 WHERE cedula LIKE @valor
+	    OR nombre LIKE @valor
+		OR primer_apellido LIKE @valor
+		OR segundo_apellido LIKE @valor
 END;
 GO

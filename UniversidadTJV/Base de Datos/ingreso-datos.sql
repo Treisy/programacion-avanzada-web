@@ -11,6 +11,9 @@ EXECUTE sp_agregar_configuracion 'UniversidadTJV', 'Mis Documentos', 'III Cuatri
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Lugares
+
+--Agregar provincias
+--========================================================================
 EXECUTE sp_agregar_lugar 'San José', 0, 1, 1
 EXECUTE sp_agregar_lugar 'Alajuela', 0, 1, 1
 EXECUTE sp_agregar_lugar 'Heredia', 0, 1, 1
@@ -19,6 +22,8 @@ EXECUTE sp_agregar_lugar 'Puntarenas', 0, 1, 1
 EXECUTE sp_agregar_lugar 'Guanacaste', 0, 1, 1
 EXECUTE sp_agregar_lugar 'Limón', 0, 1, 1
 
+--Agregar cantones
+--========================================================================
 EXECUTE sp_agregar_lugar 'San José', 1, 1, 1
 EXECUTE sp_agregar_lugar 'Alajuela', 2, 1, 1
 EXECUTE sp_agregar_lugar 'Heredia', 3, 1, 1
@@ -26,6 +31,10 @@ EXECUTE sp_agregar_lugar 'Cartago', 4, 1, 1
 EXECUTE sp_agregar_lugar 'Puntarenas', 5, 1, 1
 EXECUTE sp_agregar_lugar 'Liberia', 6, 1, 1
 EXECUTE sp_agregar_lugar 'Limón', 7, 1, 1
+
+--Agregar distritos
+--========================================================================
+
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Tipos
@@ -48,7 +57,7 @@ EXECUTE sp_agregar_alumno '205710607', 'Treisy', 'Jiménez', 'Vega', '07051982', 
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Materias
-EXECUTE sp_agregar_materia 'Programación Avanzada en Web', '00000'
+EXECUTE sp_agregar_materia 'Programación Avanzada en Web', '00000', 1, 1
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Lugares para los alumnos

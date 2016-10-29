@@ -304,8 +304,7 @@ namespace Ejecutar
                 case "6":
                     Console.Write("Ingrese un profesor que quiera buscar: ");
                     valor = Console.ReadLine();
-                    DataTable tabla = profesores.BuscarProfesor(valor);
-                    Console.WriteLine(tabla.Rows.Count);
+                    DataTable tabla = profesores.BuscarProfesores(valor);
                     foreach (DataRow fila in tabla.Rows)
                     {
                         foreach (var item in fila.ItemArray)
