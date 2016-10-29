@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConexionBD.cs" />
+    <Compile Include="dalAlumnos.cs" />
     <Compile Include="dalLugares.cs" />
     <Compile Include="dalProfesores.cs" />
     <Compile Include="dalTipos.cs" />

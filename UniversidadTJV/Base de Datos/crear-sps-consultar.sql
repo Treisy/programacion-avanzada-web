@@ -47,3 +47,21 @@ BEGIN
 	 WHERE id_profesor = @id_profesor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_consultar_alumno]
+	@id_alumno INT
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_alumno]
+		  ,[cedula]
+		  ,[nombre]
+		  ,[primer_apellido]
+		  ,[segundo_apellido]
+		  ,[fecha_nacimiento]
+		  ,[id_carrera]
+	  FROM [dbo].[tb_alumnos]
+	 WHERE id_alumno = @id_alumno
+END;
+GO
+

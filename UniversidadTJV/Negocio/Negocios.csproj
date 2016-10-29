@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="negAlumnos.cs" />
     <Compile Include="negLugares.cs" />
     <Compile Include="negProfesores.cs" />
     <Compile Include="negTipos.cs" />

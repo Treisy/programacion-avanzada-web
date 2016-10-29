@@ -54,3 +54,23 @@ BEGIN
 		OR segundo_apellido LIKE @valor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_buscar_alumno]
+	@valor VARCHAR(150)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_alumno]
+		  ,[cedula]
+		  ,[nombre]
+		  ,[primer_apellido]
+		  ,[segundo_apellido]
+		  ,[fecha_nacimiento]
+		  ,[id_carrera]
+	  FROM [dbo].[tb_alumnos]
+	 WHERE cedula LIKE @valor
+	 	OR nombre LIKE @valor
+	 	OR primer_apellido LIKE @valor
+	 	OR segundo_apellido LIKE @valor
+END;
+GO

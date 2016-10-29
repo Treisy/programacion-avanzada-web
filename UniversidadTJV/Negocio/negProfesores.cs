@@ -33,7 +33,7 @@ namespace Negocios
             return _ProfesoresDatos.ModificarProfesor(cedula, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, usuario_modifica);
         }
 
-        public DataTable BuscarProfesor(string valor)
+        public DataTable BuscarProfesores(string valor)
         {
             return _ProfesoresDatos.BuscarProfesores(valor);
         }

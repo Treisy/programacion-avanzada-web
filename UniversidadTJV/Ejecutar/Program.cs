@@ -13,6 +13,9 @@ namespace Ejecutar
             Console.WriteLine("2. Tipos");
             Console.WriteLine("3. Lugares");
             Console.WriteLine("4. Profesores");
+            Console.WriteLine("5. Alumnos");
+            Console.WriteLine("6. Materias");
+            Console.WriteLine("7. Carreras");
             Console.Write("Seleccione el módulo que desea utilizar:  ");
             string seccion;
             seccion = Console.ReadLine();
@@ -30,6 +33,15 @@ namespace Ejecutar
                     break;
                 case "4":
                     moduloProfesores();
+                    break;
+                case "5":
+                    moduloAlumnos();
+                    break;
+                case "6":
+                    moduloMaterias();
+                    break;
+                case "7":
+                    moduloCarreras();
                     break;
             }
         }
@@ -185,11 +197,11 @@ namespace Ejecutar
             string valor;
 
             Console.WriteLine("1. Listado");
-            Console.WriteLine("2. Consultar");
-            Console.WriteLine("3. Eliminar");
-            Console.WriteLine("4. Agregar");
-            Console.WriteLine("5. Modificar");
-            Console.WriteLine("6. Buscar");
+            //Console.WriteLine("2. Consultar");
+            //Console.WriteLine("3. Eliminar");
+            //Console.WriteLine("4. Agregar");
+            //Console.WriteLine("5. Modificar");
+            //Console.WriteLine("6. Buscar");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string opcion;
             opcion = Console.ReadLine();
@@ -316,6 +328,92 @@ namespace Ejecutar
                     Console.Read();
                     break;
             }
+        }
+
+        static void moduloAlumnos()
+        {
+            negAlumnos alumnos = new negAlumnos();
+            string id;
+            string valor;
+            string cedula, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, id_carrera;
+
+            Console.WriteLine("1. Listado");
+            Console.WriteLine("2. Consultar");
+            Console.WriteLine("3. Eliminar");
+            Console.WriteLine("4. Agregar");
+            Console.WriteLine("5. Modificar");
+            Console.WriteLine("6. Buscar");
+            Console.Write("Seleccione la opción que desea utilizar:  ");
+            string opcion;
+            opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1":
+                    Console.WriteLine("Listado de Alumnos");
+                    foreach (DataRow dataRow in alumnos.ListarAlumnos().Rows)
+                    {
+                        foreach (var item in dataRow.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+                case "2":
+                    Console.Write("Ingrese el ID que desea consultar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(alumnos.ConsultarAlumnos(Int32.Parse(id)).Nombre);
+                    break;
+                case "3":
+                    Console.Write("Ingrese el ID que desea eliminar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(alumnos.EliminarAlumno(Int32.Parse(id)));
+                    break;
+                case "4":
+                    Console.WriteLine("Ingrese los datos del alumno que desea ingresar: ");
+                    Console.Write("Cedula: ");
+                    cedula = Console.ReadLine();
+                    Console.Write("Nombre: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Primer Apellido: ");
+                    primer_apellido = Console.ReadLine();
+                    Console.Write("Seguno Apellido: ");
+                    segundo_apellido = Console.ReadLine();
+                    Console.Write("Fecha de Nacimiento: ");
+                    fecha_nacimiento = Console.ReadLine();
+                    Console.Write("Código de la carrera: ");
+                    id_carrera = Console.ReadLine();
+                    Console.WriteLine(alumnos.AgregarAlumno(cedula, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, Convert.ToInt32(id_carrera), 1, 1));
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    Console.Write("Ingrese un alumno que quiera buscar: ");
+                    valor = Console.ReadLine();
+                    DataTable tabla = alumnos.BuscarAlumnos(valor);
+                    foreach (DataRow fila in tabla.Rows)
+                    {
+                        foreach (var item in fila.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+            }
+        }
+
+        static void moduloMaterias()
+        {
+
+        }
+
+        static void moduloCarreras()
+        {
+
         }
     }
 }
