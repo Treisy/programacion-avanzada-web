@@ -65,3 +65,16 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE [dbo].[sp_consultar_carrera]
+	@id_carrera INT
+AS
+BEGIN
+		SET NOCOUNT ON
+	SELECT [id_carrera]
+		  ,[nombre]
+		  ,[descripcion]
+		  ,[id_profesor]
+	  FROM [dbo].[tb_carreras]
+	 WHERE id_carrera = @id_carrera
+END;
+GO

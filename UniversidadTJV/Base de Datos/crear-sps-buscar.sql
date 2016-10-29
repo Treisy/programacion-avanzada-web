@@ -74,3 +74,18 @@ BEGIN
 	 	OR segundo_apellido LIKE @valor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_buscar_carrera]
+	@valor VARCHAR(150)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_carrera]
+		  ,[nombre]
+		  ,[descripcion]
+		  ,[id_profesor]
+	  FROM [dbo].[tb_carreras]
+	 WHERE nombre LIKE @valor
+		OR descripcion LIKE @valor
+END;
+GO

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="entAlumnos.cs" />
     <Compile Include="entAlumnosXLugar.cs" />
+    <Compile Include="entCarreras.cs" />
     <Compile Include="entConfiguraciones.cs" />
     <Compile Include="entLugares.cs" />
     <Compile Include="entMaterias.cs" />

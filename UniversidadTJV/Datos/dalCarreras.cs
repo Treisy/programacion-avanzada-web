@@ -1,20 +1,20 @@
 ﻿using System;
-using Entidades;
 using System.Data;
 using System.Data.SqlClient;
+using Entidades;
 
 namespace Datos
 {
-    public class dalTipos
+    public class dalCarreras
     {
-        entTipos tipoEnt = new entTipos();
+        entCarreras carreraEnt = new entCarreras();
         ConexionBD conexion = new ConexionBD();
         SqlCommand cmd = new SqlCommand();
         DataTable datos = new DataTable();
         string mensaje;
 
         //Métodos
-        public DataTable ListarTipos()
+        public DataTable ListarCarreras()
         {
             DataTable datos = new DataTable();
             ConexionBD conexion = new ConexionBD();
@@ -22,7 +22,7 @@ namespace Datos
             try
             {
                 conexion.conectar();
-                conexion.sqlQuery("sp_listado_tipos");
+                conexion.sqlQuery("sp_listado_carreras");
                 datos = conexion.ejecutarConsultaSQL();
             }
             catch (SqlException ex)
@@ -32,22 +32,23 @@ namespace Datos
             return datos;
         }
 
-        public entTipos ConsultarTipos(int idTipo)
+        public entCarreras ConsultarCarreras(int idCarrera)
         {
             try
             {
                 conexion.conectar();
-                String[,] parametros = new String[1, 2] { { "@id_tipo", idTipo.ToString() } };
-                conexion.sqlQuery("sp_consultar_tipo", parametros);
+                String[,] parametros = new String[1, 2] { { "@id_carrera", idCarrera.ToString() } };
+                conexion.sqlQuery("sp_consultar_carrera", parametros);
                 datos = conexion.ejecutarConsultaSQL();
 
-                //Se cargan los datos del tipo, de la BD a los atributos de la clase
+                //Se cargan los datos de la carrera, de la BD a los atributos de la clase
                 if (datos.Rows.Count > 0)
                 {
                     DataRow fila = datos.Rows[0];
 
-                    this.tipoEnt.Nombre = fila["nombre"].ToString();
-                    this.tipoEnt.Tipo = fila["tipo"].ToString();
+                    this.carreraEnt.Nombre = fila["nombre"].ToString();
+                    this.carreraEnt.Descripcion = fila["descripcion"].ToString();
+                    this.carreraEnt.IdProfesor = Convert.ToInt32(fila["id_profesor"]);
                 }
 
             }
@@ -55,77 +56,79 @@ namespace Datos
             {
                 Console.WriteLine(ex);
             }
-            return this.tipoEnt;
+            return this.carreraEnt;
         }
 
-        public string EliminarTipo(int idTipo)
+        public string EliminarCarrera(int idCarrera)
         {
             try
             {
                 conexion.conectar();
-                String[,] parametros = new String[1, 2] { { "@id_tipo", idTipo.ToString() } };
-                conexion.sqlQuery("sp_eliminar_tipo", parametros);
+                String[,] parametros = new String[1, 2] { { "@id_carrera", idCarrera.ToString() } };
+                conexion.sqlQuery("sp_eliminar_carrera", parametros);
                 datos = conexion.ejecutarConsultaSQL();
-                mensaje = "El tipo fue eliminado";
+                mensaje = "La Carrera fue eliminada";
             }
             catch (SqlException ex)
             {
-                mensaje = "El tipo no pudo ser eliminado";
+                mensaje = "La Carrera no pudo ser eliminada";
                 Console.WriteLine(ex);
             }
             return mensaje;
         }
 
-        public string AgregarTipo(string nombre, string tipo, int usuario_ingresa, int usuario_modifica)
+        public string AgregarCarrera(string nombre, string descripcion, int id_profesor, int usuario_ingresa, int usuario_modifica)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[5, 2] {{  "@nombre", nombre},
+                                                         {  "@descripcion", descripcion},
+                                                         {  "@id_profesor", id_profesor.ToString() },
+                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
+                conexion.sqlQuery("sp_agregar_carrera", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "La carrera fue ingresada";
+            }
+            catch (SqlException ex)
+            {
+                mensaje = "La carrera no pudo ser ingresada";
+                Console.WriteLine(ex);
+            }
+            return mensaje;
+        }
+
+        public string ModificarCarrera(string nombre, string descripcion, int id_profesor, int usuario_modifica)
         {
             try
             {
                 conexion.conectar();
                 String[,] parametros = new String[4, 2] {{  "@nombre", nombre},
-                                                         {  "@tipo", tipo},
-                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@descripcion", descripcion},
+                                                         {  "@id_profesor", id_profesor.ToString() },
                                                          {  "@usuario_modifica", usuario_modifica.ToString()}};
-                conexion.sqlQuery("sp_agregar_tipo", parametros);
+                conexion.sqlQuery("sp_modificar_carrera", parametros);
                 datos = conexion.ejecutarConsultaSQL();
-                mensaje = "El tipo fue ingresado";
+                mensaje = "La carrera fue modificada";
             }
             catch (SqlException ex)
             {
-                mensaje = "El tipo no pudo ser ingresado";
+                mensaje = "La carrera no pudo ser modificada";
                 Console.WriteLine(ex);
             }
             return mensaje;
         }
 
-        public string ModificarTipo(string nombre, string tipo, int usuario_modifica)
-        {
-            try
-            {
-                conexion.conectar();
-                String[,] parametros = new String[3, 2] {{  "@nombre", nombre},
-                                                         {  "@tipo", tipo},
-                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
-                conexion.sqlQuery("sp_modificar_tipo", parametros);
-                datos = conexion.ejecutarConsultaSQL();
-                mensaje = "El tipo fue modificado";
-            }
-            catch (SqlException ex)
-            {
-                mensaje = "El tipo no pudo ser modificado";
-                Console.WriteLine(ex);
-            }
-            return mensaje;
-        }
-
-        public DataTable BuscarTipos(string valor)
+        public DataTable BuscarCarreras(string valor)
         {
             DataTable datos = new DataTable();
             try
-            {  
+            {
                 conexion.conectar();
                 valor = "%" + valor + "%";
                 String[,] parametros = new String[1, 2] { { "@valor", valor } };
-                conexion.sqlQuery("sp_buscar_tipo", parametros);
+                conexion.sqlQuery("sp_buscar_carrera", parametros);
                 datos = conexion.ejecutarConsultaSQL();
             }
             catch (SqlException ex)

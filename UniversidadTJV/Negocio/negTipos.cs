@@ -24,12 +24,12 @@ namespace Negocios
 
         public string AgregarTipo(string nombre, string tipo, int usuario_ingresa, int usuario_modifica)
         {
-            return _TiposDatos.AgregarUsuario(nombre, tipo, usuario_ingresa, usuario_modifica);
+            return _TiposDatos.AgregarTipo(nombre, tipo, usuario_ingresa, usuario_modifica);
         }
 
         public string ModificarTipo(string nombre, string tipo, int usuario_modifica)
         {
-            return _TiposDatos.ModificarUsuario(nombre, tipo, usuario_modifica);
+            return _TiposDatos.ModificarTipo(nombre, tipo, usuario_modifica);
         }
 
         public DataTable BuscarTipo(string valor)

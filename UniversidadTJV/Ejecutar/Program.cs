@@ -413,7 +413,72 @@ namespace Ejecutar
 
         static void moduloCarreras()
         {
+            negCarreras carreras = new negCarreras();
+            string id;
+            string valor, nombre, descripcion, id_profesor;
 
+            Console.WriteLine("1. Listado");
+            Console.WriteLine("2. Consultar");
+            Console.WriteLine("3. Eliminar");
+            Console.WriteLine("4. Agregar");
+            Console.WriteLine("5. Modificar");
+            Console.WriteLine("6. Buscar");
+            Console.Write("Seleccione la opción que desea utilizar:  ");
+            string opcion;
+            opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1":
+                    Console.WriteLine("Listado de Carreras");
+                    foreach (DataRow dataRow in carreras.ListarCarreras().Rows)
+                    {
+                        foreach (var item in dataRow.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+                case "2":
+                    Console.Write("Ingrese el ID que desea consultar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(carreras.ConsultarCarrera(Int32.Parse(id)).Nombre);
+                    Console.Read();
+                    break;
+                case "3":
+                    Console.Write("Ingrese el ID que desea eliminar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(carreras.EliminarCarrera(Int32.Parse(id)));
+                    break;
+                case "4":
+                    Console.WriteLine("Ingrese los datos de la carrera que desea ingresar: ");
+                    Console.Write("Nombre: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Descripción: ");
+                    descripcion = Console.ReadLine();
+                    Console.Write("Id de Profesor: ");
+                    id_profesor = Console.ReadLine();
+                    Console.WriteLine(carreras.AgregarCarrera(nombre, descripcion, Convert.ToInt32(id_profesor), 1, 1));
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    Console.Write("Ingrese una Carrera que quiera buscar: ");
+                    valor = Console.ReadLine();
+                    DataTable tabla = carreras.BuscarCarrera(valor);
+                    foreach (DataRow fila in tabla.Rows)
+                    {
+                        foreach (var item in fila.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+            }
         }
     }
 }

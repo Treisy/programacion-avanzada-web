@@ -53,7 +53,7 @@ EXECUTE sp_agregar_carrera 'Licenciatura en Desarrollo de Aplicaciones Web', 'Li
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Información de Alumnos
-EXECUTE sp_agregar_alumno '205710607', 'Treisy', 'Jiménez', 'Vega', '07051982', 1, 1, 1
+EXECUTE sp_agregar_alumno '205710607', 'Treisy', 'Jiménez', 'Vega', '1982-07-05', 1, 1, 1
 -------------------------------------------------------------------------------------------------------
 
 --Ingresar Materias
