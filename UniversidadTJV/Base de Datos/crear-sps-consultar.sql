@@ -69,12 +69,29 @@ CREATE PROCEDURE [dbo].[sp_consultar_carrera]
 	@id_carrera INT
 AS
 BEGIN
-		SET NOCOUNT ON
+	SET NOCOUNT ON
 	SELECT [id_carrera]
 		  ,[nombre]
 		  ,[descripcion]
 		  ,[id_profesor]
 	  FROM [dbo].[tb_carreras]
 	 WHERE id_carrera = @id_carrera
+END;
+GO
+
+CREATE PROCEDURE [dbo].[sp_consultar_materia]
+	@id_materia INT
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_materia]
+		  ,[nombre]
+		  ,[codigo]
+		  ,[usuario_ingresa]
+		  ,[fecha_ingresa]
+		  ,[usaurio_modifica]
+		  ,[fecha_modifica]
+	  FROM [dbo].[tb_materias]
+	 WHERE id_materia = @id_materia
 END;
 GO

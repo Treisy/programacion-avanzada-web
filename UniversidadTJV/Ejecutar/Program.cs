@@ -16,7 +16,7 @@ namespace Ejecutar
             Console.WriteLine("5. Alumnos");
             Console.WriteLine("6. Materias");
             Console.WriteLine("7. Carreras");
-            Console.Write("Seleccione el módulo que desea utilizar:  ");
+            Console.Write("Seleccione la opción que desea utilizar:  ");
             string seccion;
             seccion = Console.ReadLine();
 
@@ -408,7 +408,70 @@ namespace Ejecutar
 
         static void moduloMaterias()
         {
+            negMaterias materias = new negMaterias();
+            string id;
+            string valor, nombre, codigo;
 
+            Console.WriteLine("1. Listado");
+            Console.WriteLine("2. Consultar");
+            Console.WriteLine("3. Eliminar");
+            Console.WriteLine("4. Agregar");
+            Console.WriteLine("5. Modificar");
+            Console.WriteLine("6. Buscar");
+            Console.Write("Seleccione la opción que desea utilizar:  ");
+            string opcion;
+            opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1":
+                    Console.WriteLine("Listado de Materias");
+                    foreach (DataRow dataRow in materias.ListarMaterias().Rows)
+                    {
+                        foreach (var item in dataRow.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+                case "2":
+                    Console.Write("Ingrese el ID que desea consultar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(materias.ConsultarMateria(Int32.Parse(id)).Nombre);
+                    Console.Read();
+                    break;
+                case "3":
+                    Console.Write("Ingrese el ID que desea eliminar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(materias.EliminarMateria(Int32.Parse(id)));
+                    break;
+                case "4":
+                    Console.WriteLine("Ingrese los datos de la materia que desea ingresar: ");
+                    Console.Write("Nombre: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Codigo: ");
+                    codigo = Console.ReadLine();
+                    Console.WriteLine(materias.AgregarMateria(nombre, codigo, 1, 1));
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    Console.Write("Ingrese una materia que quiera buscar: ");
+                    valor = Console.ReadLine();
+                    DataTable tabla = materias.BuscarMateria(valor);
+                    foreach (DataRow fila in tabla.Rows)
+                    {
+                        foreach (var item in fila.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+            }
         }
 
         static void moduloCarreras()

@@ -43,6 +43,7 @@
     <Compile Include="negAlumnos.cs" />
     <Compile Include="negCarreras.cs" />
     <Compile Include="negLugares.cs" />
+    <Compile Include="negMaterias.cs" />
     <Compile Include="negProfesores.cs" />
     <Compile Include="negTipos.cs" />
     <Compile Include="negUsuarios.cs" />

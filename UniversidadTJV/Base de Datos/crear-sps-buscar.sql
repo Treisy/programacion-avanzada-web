@@ -89,3 +89,17 @@ BEGIN
 		OR descripcion LIKE @valor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_buscar_materia]
+	@valor VARCHAR(150)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_materia]
+		  ,[nombre]
+		  ,[codigo]
+	  FROM [dbo].[tb_materias]
+	 WHERE nombre LIKE @valor
+		OR codigo LIKE @valor
+END;
+GO

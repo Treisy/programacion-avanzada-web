@@ -129,7 +129,7 @@ CREATE PROCEDURE [dbo].[sp_agregar_materia]
 	@nombre VARCHAR(150),
 	@codigo VARCHAR(150),
 	@usuario_ingresa INT,
-	@usaurio_modifica INT
+	@usuario_modifica INT
 AS
 BEGIN
 	SET NOCOUNT ON
@@ -145,7 +145,7 @@ BEGIN
 				@codigo,
 				@usuario_ingresa,
 				GETDATE(),
-				@usaurio_modifica,
+				@usuario_modifica,
 				GETDATE())
 END;
 GO
