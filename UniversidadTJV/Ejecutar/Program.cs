@@ -6,7 +6,6 @@ namespace Ejecutar
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             Console.WriteLine("1. Usuarios");
@@ -16,6 +15,8 @@ namespace Ejecutar
             Console.WriteLine("5. Alumnos");
             Console.WriteLine("6. Materias");
             Console.WriteLine("7. Carreras");
+            Console.WriteLine("8. Configuraciones");
+            Console.WriteLine("9. Matrícula");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string seccion;
             seccion = Console.ReadLine();
@@ -194,14 +195,14 @@ namespace Ejecutar
         {
             negLugares lugares = new negLugares();
             string id;
-            string valor;
+            string valor, nombre, padre_id;
 
             Console.WriteLine("1. Listado");
-            //Console.WriteLine("2. Consultar");
-            //Console.WriteLine("3. Eliminar");
-            //Console.WriteLine("4. Agregar");
-            //Console.WriteLine("5. Modificar");
-            //Console.WriteLine("6. Buscar");
+            Console.WriteLine("2. Consultar");
+            Console.WriteLine("3. Eliminar");
+            Console.WriteLine("4. Agregar");
+            Console.WriteLine("5. Consultar por padre");
+            Console.WriteLine("6. Buscar");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string opcion;
             opcion = Console.ReadLine();
@@ -209,7 +210,7 @@ namespace Ejecutar
             switch (opcion)
             {
                 case "1":
-                    Console.WriteLine("Listado de Usuarios");
+                    Console.WriteLine("Listado de Lugares");
                     foreach (DataRow dataRow in lugares.ListarLugares().Rows)
                     {
                         foreach (var item in dataRow.ItemArray)
@@ -223,35 +224,30 @@ namespace Ejecutar
                 case "2":
                     Console.Write("Ingrese el ID que desea consultar: ");
                     id = Console.ReadLine();
-                    //Console.WriteLine(usuarios.ConsultarUsuario(Int32.Parse(id)).Nombre);
+                    Console.WriteLine(lugares.ConsultarLugar(Int32.Parse(id)).Nombre);
                     break;
                 case "3":
                     Console.Write("Ingrese el ID que desea eliminar: ");
                     id = Console.ReadLine();
-                    //Console.WriteLine(usuarios.EliminarUsuario(Int32.Parse(id)));
+                    Console.WriteLine(lugares.EliminarLugar(Int32.Parse(id)));
                     break;
                 case "4":
-                    Console.WriteLine("Ingrese los datos del usuario que desea ingresar: ");
-                    //Console.Write("Cedula: ");
-                    //cedula = Console.ReadLine();
-                    //Console.Write("Usuario: ");
-                    //nombre_usuario = Console.ReadLine();
-                    //Console.Write("Contraseña: ");
-                    //contrasena = Console.ReadLine();
-                    //Console.Write("Nombre: ");
-                    //nombre = Console.ReadLine();
-                    //Console.Write("Primer Apellido: ");
-                    //primer_apellido = Console.ReadLine();
-                    //Console.Write("Seguno Apellido: ");
-                    //segundo_apellido = Console.ReadLine();
-                    //Console.WriteLine(usuarios.AgregarUsuario(cedula, nombre_usuario, contrasena, nombre, primer_apellido, segundo_apellido, 1, 1));
+                    Console.WriteLine("Ingrese los datos del lugar que desea ingresar: ");
+                    Console.Write("Nombre: ");
+                    nombre = Console.ReadLine();
+                    Console.Write("Padre Id: ");
+                    padre_id = Console.ReadLine();
+                    Console.WriteLine(lugares.AgregarLugar(nombre, Convert.ToInt32(padre_id), 1, 1));
                     break;
                 case "5":
+                    Console.Write("Ingrese el ID que desea consultar: ");
+                    id = Console.ReadLine();
+                    Console.WriteLine(lugares.ConsultarLugarPadreId(Int32.Parse(id)).Nombre);
                     break;
                 case "6":
-                    Console.Write("Ingrese un usuario que quiera buscar: ");
+                    Console.Write("Ingrese un lugar que quiera buscar: ");
                     valor = Console.ReadLine();
-                    //Console.WriteLine(usuarios.BuscarUsuario(valor).NombreUsuario);
+                    Console.WriteLine(lugares.BuscarLugar(valor));
                     break;
             }
         }

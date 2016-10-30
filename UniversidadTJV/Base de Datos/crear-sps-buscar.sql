@@ -103,3 +103,15 @@ BEGIN
 		OR codigo LIKE @valor
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_buscar_lugar]
+	@valor VARCHAR(150)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_lugar]
+		  ,[nombre]
+	  FROM [dbo].[tb_lugares]
+	 WHERE nombre LIKE @valor
+END;
+GO

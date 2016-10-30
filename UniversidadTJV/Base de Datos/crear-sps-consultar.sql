@@ -95,3 +95,29 @@ BEGIN
 	 WHERE id_materia = @id_materia
 END;
 GO
+
+CREATE PROCEDURE [dbo].[sp_consultar_lugar]
+	@id_lugar INT
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_lugar]
+		  ,[nombre]
+		  ,[padre_id]
+	  FROM [dbo].[tb_lugares]
+	 WHERE id_lugar = @id_lugar
+END;
+GO
+
+CREATE PROCEDURE [dbo].[sp_consultar_lugar_padre_id]
+	@padre_id INT
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT [id_lugar]
+		  ,[nombre]
+		  ,[padre_id]
+	  FROM [dbo].[tb_lugares]
+	 WHERE padre_id = @padre_id
+END;
+GO
