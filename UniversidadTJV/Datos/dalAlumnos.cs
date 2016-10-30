@@ -12,14 +12,11 @@ namespace Datos
         SqlCommand cmd = new SqlCommand();
         DataTable datos = new DataTable();
         string mensaje;
+        System.Text.StringBuilder errorMessages = new System.Text.StringBuilder();
 
         //Métodos
         public DataTable ListarAlumnos()
         {
-            DataTable datos = new DataTable();
-            entAlumnos alumnos = new entAlumnos();
-            ConexionBD conexion = new ConexionBD();
-
             try
             {
                 conexion.conectar();
@@ -75,7 +72,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El alumno no pudo ser eliminado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -100,7 +105,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El alumno no pudo ser ingresado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -124,7 +137,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El alumno no pudo ser modificado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -143,9 +164,63 @@ namespace Datos
             }
             catch (SqlException ex)
             {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return datos;
         }
+
+        public string AgregarAlumnoXLugar(int id_alumno, int id_lugar, int usuario_ingresa, int usuario_modifica)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[4, 2] {{  "@id_alumno", id_alumno.ToString()},
+                                                         {  "@id_lugar", id_lugar.ToString()},
+                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
+                conexion.sqlQuery("sp_agregar_alumno_x_lugar", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "Los datos fueron almacenados";
+            }
+            catch (SqlException ex)
+            {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
+            }
+            return mensaje;
+        }
+
+        public DataTable ListarAlumnosXLugar(int idAlumno)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id_alumno", idAlumno.ToString() } };
+                conexion.sqlQuery("sp_listado_alumnos_x_lugar", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return datos;
+        }
+
     }
 }
