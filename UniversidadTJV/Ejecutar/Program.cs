@@ -474,7 +474,7 @@ namespace Ejecutar
         {
             negCarreras carreras = new negCarreras();
             string id;
-            string valor, nombre, descripcion, id_profesor;
+            string valor, nombre, descripcion, id_profesor, costo, id_carrera, id_materia;
 
             Console.WriteLine("1. Listado");
             Console.WriteLine("2. Consultar");
@@ -482,6 +482,8 @@ namespace Ejecutar
             Console.WriteLine("4. Agregar");
             Console.WriteLine("5. Modificar");
             Console.WriteLine("6. Buscar");
+            Console.WriteLine("7. Agregar materias asignadas");
+            Console.WriteLine("8. Listar las materias asignadas");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string opcion;
             opcion = Console.ReadLine();
@@ -530,6 +532,30 @@ namespace Ejecutar
                     foreach (DataRow fila in tabla.Rows)
                     {
                         foreach (var item in fila.ItemArray)
+                        {
+                            Console.Write(item + "   ");
+                        }
+                        Console.WriteLine();
+                    }
+                    Console.Read();
+                    break;
+                case "7":
+                    Console.WriteLine("Ingrese los datos de la materia que desea asociar: ");
+                    Console.Write("Costo: ");
+                    costo = Console.ReadLine();
+                    Console.Write("ID de la carrera: ");
+                    id_carrera = Console.ReadLine();
+                    Console.Write("Id de la materia: ");
+                    id_materia = Console.ReadLine();
+                    Console.WriteLine(carreras.AgregarCarrera(costo, id_carrera, Convert.ToInt32(id_materia), 1, 1));
+                    break;
+                case "8":
+                    Console.Write("Ingrese el ID de la carrera que desea ver la materias:  ");
+                    id_carrera = Console.ReadLine();
+                    Console.WriteLine("Listado de Materias asociadas");
+                    foreach (DataRow dataRow in carreras.ListarMateriasXCarrera(Convert.ToInt32(id_carrera)).Rows)
+                    {
+                        foreach (var item in dataRow.ItemArray)
                         {
                             Console.Write(item + "   ");
                         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Entidades;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,15 +11,12 @@ namespace Datos
         ConexionBD conexion = new ConexionBD();
         SqlCommand cmd = new SqlCommand();
         DataTable datos = new DataTable();
+        System.Text.StringBuilder errorMessages = new System.Text.StringBuilder();
         string mensaje;
 
         //Métodos
         public DataTable ListarProfesores()
         {
-            DataTable datos = new DataTable();
-            entProfesores profesores = new entProfesores();
-            ConexionBD conexion = new ConexionBD();
-
             try
             {
                 conexion.conectar();
@@ -75,7 +71,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El profesor no pudo ser eliminado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -99,7 +103,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El profesor no pudo ser ingresado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -122,7 +134,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El profesor no pudo ser modificado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -137,6 +157,112 @@ namespace Datos
                 valor = "%" + valor + "%";
                 String[,] parametros = new String[1, 2] { { "@valor", valor } };
                 conexion.sqlQuery("sp_buscar_profesor", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return datos;
+        }
+
+        public string AgregarTiposXProfesor(string descripcion, int id_profesor, int id_tipo, int usuario_ingresa, int usuario_modifica)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[5, 2] {{  "@descripcion", descripcion},
+                                                         {  "@id_profesor", id_profesor.ToString()},
+                                                         {  "@id_tipo", id_tipo.ToString()},
+                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
+                conexion.sqlQuery("sp_agregar_tipo_x_profesor", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "La información fue ingresada";
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return mensaje;
+        }
+
+        public DataTable ListarTiposXProfesor(int idProfesor)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id_profesor", idProfesor.ToString() } };
+                conexion.sqlQuery("sp_listado_tipos_x_profseor", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+            }
+            catch(SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return datos;
+        }
+
+        public string EliminarTiposXProfesor(int id)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id", id.ToString() } };
+                conexion.sqlQuery("sp_eliminar_tipo_x_profesor", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "La información fue eliminada";
+            }
+            catch (SqlException ex)
+            {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
+            }
+            return mensaje;
+        }
+
+        public string AgregarProfesorXLugar(int id_profesor, int id_lugar, int usuario_ingresa, int usuario_modifica)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[4, 2] {{  "@id_profesor", id_profesor.ToString()},
+                                                         {  "@id_lugar", id_lugar.ToString()},
+                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
+                conexion.sqlQuery("sp_agregar_profesor_x_lugar", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "Los datos fueron almacenados";
+            }
+            catch (SqlException ex)
+            {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
+            }
+            return mensaje;
+        }
+
+        public DataTable ListarProfesoresXLugar(int idProfesor)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id_profesor", idProfesor.ToString() } };
+                conexion.sqlQuery("sp_listado_profesores_x_lugar", parametros);
                 datos = conexion.ejecutarConsultaSQL();
             }
             catch (SqlException ex)

@@ -222,5 +222,67 @@ namespace Datos
             return datos;
         }
 
+        public string AgregarTiposXAlumno(string descripcion, int id_alumno, int id_tipo, int usuario_ingresa, int usuario_modifica)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[5, 2] {{  "@descripcion", descripcion},
+                                                         {  "@id_alumno", id_alumno.ToString()},
+                                                         {  "@id_tipo", id_tipo.ToString()},
+                                                         {  "@usuario_ingresa", usuario_ingresa.ToString() },
+                                                         {  "@usuario_modifica", usuario_modifica.ToString()}};
+                conexion.sqlQuery("sp_agregar_tipo_x_alumno", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "La información fue ingresada";
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return mensaje;
+        }
+
+        public DataTable ListarTiposXAlumno(int idAlumno)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id_alumno", idAlumno.ToString() } };
+                conexion.sqlQuery("sp_listado_tipos_x_alumno", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return datos;
+        }
+
+        public string EliminarTiposXAlumno(int id)
+        {
+            try
+            {
+                conexion.conectar();
+                String[,] parametros = new String[1, 2] { { "@id", id.ToString() } };
+                conexion.sqlQuery("sp_eliminar_tipo_x_alumno", parametros);
+                datos = conexion.ejecutarConsultaSQL();
+                mensaje = "La información fue eliminada";
+            }
+            catch (SqlException ex)
+            {
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString());
+            }
+            return mensaje;
+        }
+
     }
 }

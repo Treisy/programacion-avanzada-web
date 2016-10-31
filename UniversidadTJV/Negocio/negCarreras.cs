@@ -36,5 +36,20 @@ namespace Negocios
         {
             return _CarrerasDatos.BuscarCarreras(valor);
         }
+
+        public string AgregarMateriasXCarrera(float costo, int id_carrera, int id_materia, int usuario_ingresa, int usuario_modifica)
+        {
+            return _CarrerasDatos.AgregarMateriasXCarrera(costo, id_carrera, id_materia, usuario_ingresa, usuario_modifica);
+        }
+
+        public DataTable ListarMateriasXCarrera(int id_carrera)
+        {
+            return _CarrerasDatos.ListarMateriasXCarrera(id_carrera);
+        }
+
+        public string EliminarMateriasXCarrera(int id)
+        {
+            return _CarrerasDatos.EliminarMateriasXCarrera(id);
+        }
     }
 }

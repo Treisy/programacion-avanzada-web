@@ -47,5 +47,20 @@ namespace Negocios
         {
             return _AlumnosDatos.ListarAlumnosXLugar(idAlumno);
         }
+
+        public string AgregarTiposXAlumno(string descripcion, int id_alumno, int id_tipo, int usuario_ingresa, int usuario_modifica)
+        {
+            return _AlumnosDatos.AgregarTiposXAlumno(descripcion, id_alumno, id_tipo, usuario_ingresa, usuario_modifica);
+        }
+
+        public DataTable ListarTiposXAlumno(int idAlumno)
+        {
+            return _AlumnosDatos.ListarTiposXAlumno(idAlumno);
+        }
+
+        public string EliminarTiposXAlumno(int id)
+        {
+            return _AlumnosDatos.EliminarTiposXAlumno(id);
+        }
     }
 }
