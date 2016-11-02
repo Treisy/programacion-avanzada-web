@@ -12,6 +12,7 @@ namespace Datos
         SqlCommand cmd = new SqlCommand();
         DataTable datos = new DataTable();
         string mensaje;
+        System.Text.StringBuilder errorMessages = new System.Text.StringBuilder();
 
         //Métodos
         public DataTable ListarLugares()
@@ -93,7 +94,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El lugar no pudo ser eliminado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -114,7 +123,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El lugar no pudo ser ingresado";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -134,7 +151,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "El lugar no pudo ser modificado";
+               for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;

@@ -8,6 +8,11 @@ namespace Ejecutar
     {
         static void Main(string[] args)
         {
+            menuPrincipal();
+        }
+
+        static void menuPrincipal()
+        {
             Console.WriteLine("1. Usuarios");
             Console.WriteLine("2. Tipos");
             Console.WriteLine("3. Lugares");
@@ -17,6 +22,7 @@ namespace Ejecutar
             Console.WriteLine("7. Carreras");
             Console.WriteLine("8. Configuraciones");
             Console.WriteLine("9. Matrícula");
+            Console.WriteLine("10. Salir");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string seccion;
             seccion = Console.ReadLine();
@@ -44,6 +50,14 @@ namespace Ejecutar
                 case "7":
                     moduloCarreras();
                     break;
+                case "8":
+                    //moduloConfiguraciones();
+                    break;
+                case "9":
+                    //moduloMatriculas();
+                    break;
+                case "10":
+                    break;
             }
         }
 
@@ -58,8 +72,7 @@ namespace Ejecutar
             Console.WriteLine("2. Consultar");
             Console.WriteLine("3. Eliminar");
             Console.WriteLine("4. Agregar");
-            Console.WriteLine("5. Modificar");
-            Console.WriteLine("6. Buscar");
+            Console.WriteLine("5. Buscar");
             Console.Write("Seleccione la opción que desea utilizar:  ");
             string opcion;
             opcion = Console.ReadLine();
@@ -67,6 +80,7 @@ namespace Ejecutar
             switch (opcion)
             {
                 case "1":
+                    Console.WriteLine("\n");
                     Console.WriteLine("Listado de Usuarios");
                     foreach (DataRow dataRow in usuarios.ListarUsuarios().Rows)
                     {
@@ -76,19 +90,21 @@ namespace Ejecutar
                         }
                         Console.WriteLine();
                     }
-                    Console.Read();
                     break;
                 case "2":
+                    Console.WriteLine("\n");
                     Console.Write("Ingrese el ID que desea consultar: ");
                     id = Console.ReadLine();
                     Console.WriteLine(usuarios.ConsultarUsuario(Int32.Parse(id)).Nombre);
                     break;
                 case "3":
+                    Console.WriteLine("\n");
                     Console.Write("Ingrese el ID que desea eliminar: ");
                     id = Console.ReadLine();
                     Console.WriteLine(usuarios.EliminarUsuario(Int32.Parse(id)));
                     break;
                 case "4":
+                    Console.WriteLine("\n");
                     Console.WriteLine("Ingrese los datos del usuario que desea ingresar: ");
                     Console.Write("Cedula: ");
                     cedula = Console.ReadLine();
@@ -105,8 +121,7 @@ namespace Ejecutar
                     Console.WriteLine(usuarios.AgregarUsuario(cedula, nombre_usuario, contrasena, nombre, primer_apellido, segundo_apellido, 1, 1));
                     break;
                 case "5":
-                    break;
-                case "6":
+                    Console.WriteLine("\n");
                     Console.Write("Ingrese un usuario que quiera buscar: ");
                     valor = Console.ReadLine();
                     DataTable tabla = usuarios.BuscarUsuario(valor);
@@ -121,6 +136,8 @@ namespace Ejecutar
                     Console.Read();
                     break;
             }
+            Console.WriteLine("\n");
+            menuPrincipal();
         }
 
         static void moduloTipos()

@@ -69,7 +69,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "La Carrera no pudo ser eliminada";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -91,7 +99,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "La carrera no pudo ser ingresada";
+                for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
@@ -112,7 +128,15 @@ namespace Datos
             }
             catch (SqlException ex)
             {
-                mensaje = "La carrera no pudo ser modificada";
+               for (int i = 0; i < ex.Errors.Count; i++)
+                {
+                    errorMessages.Append("Index #" + i + "\n" +
+                        "Message: " + ex.Errors[i].Message + "\n" +
+                        "LineNumber: " + ex.Errors[i].LineNumber + "\n" +
+                        "Source: " + ex.Errors[i].Source + "\n" +
+                        "Procedure: " + ex.Errors[i].Procedure + "\n");
+                }
+                Console.WriteLine(errorMessages.ToString()); ;
                 Console.WriteLine(ex);
             }
             return mensaje;
